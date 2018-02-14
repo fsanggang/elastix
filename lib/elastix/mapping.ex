@@ -2,7 +2,7 @@ defmodule Elastix.Mapping do
   @moduledoc """
   """
   import Elastix.HTTP, only: [prepare_url: 2]
-  alias Elastix.HTTP
+  alias Elastix.{HTTP, JSON}
 
   @doc false
   def put(elastic_url, index_names, type_name, data) when is_list(index_names) do
@@ -17,7 +17,7 @@ defmodule Elastix.Mapping do
   @doc false
   def put(elastic_url, index_names, type_name, data, query_params) when is_list(index_names) do
     prepare_url(elastic_url, make_path(index_names, [type_name], query_params))
-    |> HTTP.put(Poison.encode!(data))
+    |> HTTP.put(JSON.encode!(data))
   end
 
   @doc false
